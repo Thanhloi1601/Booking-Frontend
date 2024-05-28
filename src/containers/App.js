@@ -4,7 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import { ConnectedRouter as Router } from "connected-react-router";
 import { history } from "../redux";
 import { ToastContainer } from "react-toastify";
-
+import CustomScrollbars from "../components/CustomScrollbars";
 import {
   userIsAuthenticated,
   userIsNotAuthenticated,
@@ -13,13 +13,12 @@ import {
 import { path } from "../utils";
 
 import Home from "../routes/Home";
-// import Login from '../routes/Login';
-import Login from "./Auth/Login";
-import Header from "./Header/Header";
-import System from "../routes/System";
 
+import Login from "./Auth/Login";
+
+import System from "../routes/System";
+import HomePage from "./HomePage/HomePage"
 import { CustomToastCloseButton } from "../components/CustomToast";
-import ConfirmModal from "../components/ConfirmModal";
 
 class App extends Component {
   handlePersistorState = () => {
@@ -45,10 +44,10 @@ class App extends Component {
       <Fragment>
         <Router history={history}>
           <div className="main-container">
-            <ConfirmModal />
-            {this.props.isLoggedIn && <Header />}
 
-            <span className="content-container">
+
+            <div className="content-container">
+              <CustomScrollbars style={{height:'100vh', width: '100%'}}>
               <Switch>
                 <Route path={path.HOME} exact component={Home} />
                 <Route
@@ -59,8 +58,13 @@ class App extends Component {
                   path={path.SYSTEM}
                   component={userIsAuthenticated(System)}
                 />
+                 <Route
+                  path={path.HOMEPAGE}
+                  component={HomePage}
+                />
               </Switch>
-            </span>
+              </CustomScrollbars>
+            </div>
 
             <ToastContainer
               className="toast-container"
@@ -84,7 +88,7 @@ class App extends Component {
 const mapStateToProps = (state) => {
   return {
     started: state.app.started,
-    isLoggedIn: state.user.isLoggedIn,
+ 
   };
 };
 
