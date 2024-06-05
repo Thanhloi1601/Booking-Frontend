@@ -7,11 +7,18 @@ import logo from "../../assets/images/logo.svg";
 import { LANGUAGES } from "../../utils";
 import { changeLanguageApp } from "../../store/actions";
 import { lang } from "moment";
+import {withRouter} from 'react-router'
 class HomeHeader extends Component {
   changeLanguage = (language) => {
     this.props.changeLanguageAppRedux(language);
     // fire redux event : actions
   };
+
+  returnToHome =()=>{
+    if(this.props.history){
+      this.props.history.push(`/home`)
+    }
+  }
   render() {
     let language = this.props.language;
    
@@ -21,7 +28,7 @@ class HomeHeader extends Component {
           <div className="home-header-content">
             <div className="left-content">
               <i className="fas fa-bars"></i>
-              <img className="header-logo" src={logo}></img>
+              <img className="header-logo" src={logo} onClick={()=>this.returnToHome()}></img>
             </div>
             <div className="center-content">
               <div className="child-content">
@@ -96,6 +103,7 @@ class HomeHeader extends Component {
           </div>
          
         </div>
+        {this.props.isShowBanner === true &&
         <div className="home-header-banner">
             <div className="content-up">
               <div className="title1">
@@ -166,6 +174,7 @@ class HomeHeader extends Component {
               </div>
             </div>
           </div>
+           }
       </React.Fragment>
     );
   }
@@ -185,4 +194,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeHeader);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomeHeader));

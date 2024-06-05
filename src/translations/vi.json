@@ -35,6 +35,26 @@
             "handbook":"Cẩm nang",
             "manage-handbook":"Quản lý cẩm nang"
         }
+    },
+    "manage-user":{
+        "add":"Thêm người dùng mới",
+        "email":"Email",
+        "password":"Mật khẩu",
+        "first-name":"Tên",
+        "last-name":"Họ",
+        "phone-number":"Số điện thoại",
+        "address":"Địa chỉ",
+        "gender":"Giới tính",
+        "position":"Chức vụ",
+        "role":"Vai trò",
+        "save":"Lưu user",
+        "image":"Ảnh",
+        "edit":"Lưu thay đổi"
+
+    },
+    "homepage":{
+        "out-standing-doctor":"Bác sĩ nổi bật tuần qua",
+        "more-infor":"Xem thêm"
     }
   
 }

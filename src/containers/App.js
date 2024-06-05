@@ -17,9 +17,10 @@ import Home from "../routes/Home";
 import Login from "./Auth/Login";
 
 import System from "../routes/System";
-import HomePage from "./HomePage/HomePage"
+import HomePage from "./HomePage/HomePage";
 import { CustomToastCloseButton } from "../components/CustomToast";
 
+import DetailDoctor from "./Patient/Doctor/DetailDoctor";
 class App extends Component {
   handlePersistorState = () => {
     const { persistor } = this.props;
@@ -44,29 +45,26 @@ class App extends Component {
       <Fragment>
         <Router history={history}>
           <div className="main-container">
-
-
             <div className="content-container">
-              <CustomScrollbars style={{height:'100vh', width: '100%'}}>
-              <Switch>
-                <Route path={path.HOME} exact component={Home} />
-                <Route
-                  path={path.LOGIN}
-                  component={userIsNotAuthenticated(Login)}
-                />
-                <Route
-                  path={path.SYSTEM}
-                  component={userIsAuthenticated(System)}
-                />
-                 <Route
-                  path={path.HOMEPAGE}
-                  component={HomePage}
-                />
-              </Switch>
+              <CustomScrollbars style={{ height: "100vh", width: "100%" }}>
+                <Switch>
+                  <Route path={path.HOME} exact component={Home} />
+                  <Route
+                    path={path.LOGIN}
+                    component={userIsNotAuthenticated(Login)}
+                  />
+                  <Route
+                    path={path.SYSTEM}
+                    component={userIsAuthenticated(System)}
+                  />
+                  <Route path={path.HOMEPAGE} component={HomePage} />
+
+                  <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />
+                </Switch>
               </CustomScrollbars>
             </div>
 
-            <ToastContainer
+            {/* <ToastContainer
               className="toast-container"
               toastClassName="toast-item"
               bodyClassName="toast-item-body"
@@ -77,6 +75,17 @@ class App extends Component {
               closeOnClick={false}
               draggable={false}
               closeButton={<CustomToastCloseButton />}
+            /> */}
+            <ToastContainer
+              position="bottom-right"
+              autoClose={3000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
             />
           </div>
         </Router>
@@ -88,7 +97,6 @@ class App extends Component {
 const mapStateToProps = (state) => {
   return {
     started: state.app.started,
- 
   };
 };
 
