@@ -7,7 +7,7 @@ import "./ProfileDoctor.scss";
 import NumberFormat from "react-number-format";
 import _ from "lodash";
 import moment from "moment/moment";
-
+import {Link} from 'react-router-dom'
 class ProfileDoctor extends Component {
   constructor(props) {
     super(props);
@@ -78,10 +78,10 @@ class ProfileDoctor extends Component {
     }
   };
   render() {
+
     let { dataProfile } = this.state;
-    let { language, isShowDescriptionDoctor, dataTime } = this.props;
-    let nameVi = "",
-      nameEn = "";
+    let { language, isShowDescriptionDoctor, dataTime,isShowLinkDetail,  isShowPrice,doctorId}=this.props;
+    let  nameVi ="",  nameEn = "";
     if (dataProfile && dataProfile.positionData) {
       nameVi = `${dataProfile.positionData.valueVi}, ${dataProfile.lastName} ${dataProfile.firstName}`;
       nameEn = `${dataProfile.positionData.valueEn}, ${dataProfile.firstName} ${dataProfile.lastName}`;
@@ -116,6 +116,16 @@ class ProfileDoctor extends Component {
             </div>
           </div>
         </div>
+
+        { isShowLinkDetail === true && 
+        
+        <div className="view-deatil-doctor">
+
+          <Link to={`/detail-doctor/${doctorId}`}>Xem thêm</Link>
+        
+          </div>
+        }
+        {isShowPrice === true && 
         <div className="price">
           <FormattedMessage id="patient.booking-modal.price" />:
           {dataProfile &&
@@ -141,6 +151,7 @@ class ProfileDoctor extends Component {
               />
             )}
         </div>
+        }
       </div>
     );
   }

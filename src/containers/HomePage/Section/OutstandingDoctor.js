@@ -25,7 +25,7 @@ class OutstandingDoctor extends Component {
  this.props.loadTopDoctors();
   }
   handleViewdetailDoctor = (doctor)=>{
-    console.log('check view infor',doctor)
+
     if(this.props.history){
       this.props.history.push(`/detail-doctor/${doctor.id}`)
     }
@@ -36,7 +36,6 @@ class OutstandingDoctor extends Component {
    
     let arrDoctors = this.state.arrDoctors;
      arrDoctors = arrDoctors.concat(arrDoctors).concat(arrDoctors)
-    console.log('check doctor',arrDoctors)
     let {language}=this.props
     return (
       <div className="section-share section-outstanding-doctor">

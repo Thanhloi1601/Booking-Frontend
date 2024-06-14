@@ -1,34 +1,23 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { LANGUAGES } from "../../../utils";
 import { FormattedMessage } from "react-intl";
 
+
+import "./DefaultClass.scss";
 class DefaultClass extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-    
-    };
+    this.state = {};
   }
-  componentDidMount() {}
+  async componentDidMount() {}
 
   async componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.props.language !== prevProps.language) {
     }
-
-    
   }
 
-  showHideDetailInfor = (status) => {
-    this.setState({
-      isShowDetailInfor: status,
-    });
-  };
   render() {
-   
-    return (
-      <div></div>
-    );
+    return <div></div>;
   }
 }
 

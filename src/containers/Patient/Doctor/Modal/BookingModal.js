@@ -91,8 +91,8 @@ class BookingModal extends Component {
 
   handleConfirmBooking = async () => {
     // !data.email || !data.doctorId || !data.timeType || !data.date
-    let date = new Date(this.state.birthday).getTime();
-    let timeString = this.buildTimeBooking(this.props.dataTime)
+    // let date = new Date(this.state.birthday).getTime();
+    let timeString = this.buildTimeBooking(this.props.dataTime);
     let doctorName = this.buildDoctorName(this.props.dataTime);
 
     let res = await postPaitentBooking({
@@ -101,14 +101,14 @@ class BookingModal extends Component {
       email: this.state.email,
       address: this.state.address,
       reason: this.state.reason,
-      date: date,
+      date: this.props.dataTime.date,
+      // birthday: date,
       selectedGender: this.state.selectedGender.value,
       doctorId: this.state.doctorId,
       timeType: this.state.timeType,
       language: this.props.language,
-      timeString:timeString,
-      doctorName:doctorName
-      
+      timeString: timeString,
+      doctorName: doctorName,
     });
     if (res && res.errCode === 0) {
       toast.success("Booking a new appointment succeed");
@@ -139,25 +139,24 @@ class BookingModal extends Component {
     return <></>;
   };
 
-  buildDoctorName =(dataTime)=>{
+  buildDoctorName = (dataTime) => {
     let { language } = this.props;
     if (dataTime && !_.isEmpty(dataTime)) {
-      let name = language ===  LANGUAGES.VI ? 
-      `${dataTime.doctorData.lastName}  ${dataTime.doctorData.firstName}`:
-
-       `${dataTime.doctorData.firstName}  ${dataTime.doctorData.lastName}`
+      let name =
+        language === LANGUAGES.VI
+          ? `${dataTime.doctorData.lastName}  ${dataTime.doctorData.firstName}`
+          : `${dataTime.doctorData.firstName}  ${dataTime.doctorData.lastName}`;
       return name;
     }
-    return '';
-  }
+    return "";
+  };
   render() {
     let { isOpenModal, closeBookingModalClose, dataTime } = this.props;
     let doctorId = "";
     if (dataTime && !_.isEmpty(dataTime)) {
       doctorId = dataTime.doctorId;
     }
-    
-console.log('cehck data tiem',dataTime)
+
     return (
       <Modal
         isOpen={isOpenModal}
@@ -183,9 +182,10 @@ console.log('cehck data tiem',dataTime)
                 doctorId={doctorId}
                 isShowDescriptionDoctor={false}
                 dataTime={dataTime}
+                isShowLinkDetail={false}
+                isShowPrice={true}
               />
             </div>
-
             <div className="row">
               <div className="col-6 form-group">
                 <label>
